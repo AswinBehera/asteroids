@@ -5,6 +5,9 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    g_clock = pygame.time.Clock()
+    dt = 0
+
     while 1:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -13,6 +16,7 @@ def main():
         screen.fill((0,0,0))
         pygame.display.flip()
 
+        dt = g_clock.tick(60) / 1000
 
     """"
     print("Starting Asteroids!")
