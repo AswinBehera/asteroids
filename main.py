@@ -5,25 +5,30 @@ from player import Player
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group() 
 
     x = SCREEN_WIDTH/2
     y = SCREEN_HEIGHT/2
 
+    Player.containers = (updatable, drawable)
     p1 = Player(x, y)
 
     g_clock = pygame.time.Clock()
     dt = 0
 
-    while 1:
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         
         screen.fill((0,0,0))
-        p1.update(dt)
-        p1.draw(screen)
-        pygame.display.flip()
 
+        updatable.update(dt)
+        for obj in drawable:
+            obj.draw(screen)
+
+        pygame.display.flip()
         dt = g_clock.tick(60) / 1000
 
     """"
